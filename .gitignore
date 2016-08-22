@@ -1,3 +1,4 @@
 # exclude every except directory ...
 node_modules/*
 .idea/*
+dist/*
