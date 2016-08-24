@@ -9,24 +9,37 @@
   "author": "zihan",
   "license": "MIT license",
   "devDependencies": {
+    "browser-sync": "^2.14.0",
     "flux": "^2.1.1",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "^6.1.2",
     "gulp-browserify": "^0.5.1",
     "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^3.0.1",
+    "gulp-filter": "^4.0.0",
     "gulp-jshint": "^2.0.1",
+    "gulp-newer": "^1.2.0",
     "gulp-nodemon": "^2.1.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
     "gulp-react": "^3.1.0",
+    "gulp-reactify": "^3.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^2.0.0",
-    "jshint": "^2.9.3"
+    "jshint": "^2.9.3",
+    "reactify": "^1.1.1"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
+    "browserify": "^13.1.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "multer": "^1.2.0",
     "react": "^15.3.1",
-    "react-dom": "^15.3.1"
+    "react-dom": "^15.3.1",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

@@ -8,7 +8,12 @@ var ReactDOM = require('react-dom');
 console.log("hey");
 console.log(React);
 console.log(ReactDOM);
+//ReactDOM.render(
+//<App />,
+//    document.getElementById('app')
+//);
+// tutorial1.js
 ReactDOM.render(
-<App />,
-    document.getElementById('app')
+    <h1>Hello, world!</h1>,
+    document.getElementById('example')
 );
