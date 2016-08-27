@@ -13,7 +13,23 @@ console.log(ReactDOM);
 //    document.getElementById('app')
 //);
 // tutorial1.js
+//ReactDOM.render(
+//    <h1>Hello, world!</h1>,
+//    document.getElementById('example')
+//);
+
+// tutorial1.js
+// tutorial1-raw.js
+var CommentBox = React.createClass({displayName: 'CommentBox',
+    render: function() {
+        return (
+            React.createElement('div', {className: "commentBox"},
+                "Hello, world! I am a CommentBox."
+            )
+        );
+    }
+});
 ReactDOM.render(
-    <h1>Hello, world!</h1>,
+    React.createElement(CommentBox, null),
     document.getElementById('example')
 );
