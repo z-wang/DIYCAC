@@ -19,6 +19,7 @@ var uglify = require('gulp-uglify');
 var browserify = require('browserify');
 var reactify = require('reactify');
 var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 
 var jsFiles = {
     vendors: [
@@ -45,72 +46,84 @@ var jsFiles = {
 
 // Copy react.js and react-dom.js to assets/js/src/vendor
 // only if the copy in node_modules is "newer"
-gulp.task('copy-react', function() {
-    return gulp.src('node_modules/react/dist/react.js')
-        .pipe(newer('app/js/vendors/react.js'))
-        .pipe(gulp.dest('app/js/vendors'));
-});
-
-gulp.task('copy-react-dom', function() {
-    return gulp.src('node_modules/react-dom/dist/react-dom.js')
-        .pipe(newer('app/js/vendors/react-dom.js'))
-        .pipe(gulp.dest('app/js/vendors'));
-});
-
-// Copy assets/js/vendor/* to assets/js
-gulp.task('copy-js-vendor', function() {
-    return gulp
-        .src([
-            'app/js/vendors/*'
-        ])
-        .pipe(gulp.dest('dist/js'));
-});
+//gulp.task('copy-react', function() {
+//    return gulp.src('node_modules/react/dist/react.js')
+//        .pipe(newer('app/js/vendors/react.js'))
+//        .pipe(gulp.dest('app/js/vendors'));
+//});
+//
+//gulp.task('copy-react-dom', function() {
+//    return gulp.src('node_modules/react-dom/dist/react-dom.js')
+//        .pipe(newer('app/js/vendors/react-dom.js'))
+//        .pipe(gulp.dest('app/js/vendors'));
+//});
+//
+//// Copy assets/js/vendor/* to assets/js
+//gulp.task('copy-js-vendor', function() {
+//    return gulp
+//        .src([
+//            'app/js/vendors/*'
+//        ])
+//        .pipe(gulp.dest('dist/js'));
+//});
 
 gulp.task('copy', function(){
-    gulp.src('app/index.html')
+    gulp.src('app/*.html')
         .pipe(gulp.dest('dist'));
-    gulp.src('app/css/*.*')
+    gulp.src('app/css/*/*.*')
         .pipe(gulp.dest('dist/css'));
     gulp.src('app/js/vendors/*.*')
         .pipe(gulp.dest('dist/js'));
+    gulp.src('app/images/*.*')
+        .pipe(gulp.dest('dist/images'));
 });
 
 gulp.task('browserify', function(){
-    browserify('./app/js/main.js')
+    return browserify('./app/js/main.js')
         .transform('reactify')
         .bundle()
         .pipe(source('main.js'))
+        .pipe(buffer())
+        //.pipe(gulp.dest('dist/js'))
+        .pipe(rename('main.min.js'))
+        .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
 });
 
  //Concatenate jsFiles.vendor and jsFiles.source into one JS file.
  //Run copy-react and eslint before concatenating
-gulp.task('concat', ['copy-react', 'copy-react-dom'], function() {
-    return gulp.src(jsFiles.vendor.concat(jsFiles.source))
-        .pipe(sourcemaps.init())
-        .pipe(babel({
-            only: [
-                'app/js/*.js'
-            ],
-            compact: true
-        }))
-        .pipe(concat('main.js'))
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('dist'));
-});
+//gulp.task('concat', ['copy-react', 'copy-react-dom'], function() {
+//    return gulp.src(jsFiles.vendor.concat(jsFiles.source))
+//        .pipe(sourcemaps.init())
+//        .pipe(babel({
+//            only: [
+//                'app/js/*.js'
+//            ],
+//            compact: true
+//        }))
+//        .pipe(concat('main.js'))
+//        .pipe(sourcemaps.write('./'))
+//        .pipe(gulp.dest('dist'));
+//});
 
 // Concatenate & Minify JS
-gulp.task('scripts', function() {
-    return gulp.src(jsFiles.source)
-        .pipe(sourcemaps.init())
-        .pipe(react())
-        .pipe(concat('main.js'))
-        .pipe(gulp.dest('dist'))
-        .pipe(rename('main.min.js'))
-        .pipe(uglify())
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('dist/js'));
-});
+//gulp.task('scripts', function() {
+//    return gulp.src(jsFiles.source)
+//        .pipe(sourcemaps.init())
+//        .pipe(react())
+//        .pipe(concat('main.js'))
+//        .pipe(gulp.dest('dist'))
+//        .pipe(rename('main.min.js'))
+//        .pipe(uglify())
+//        .pipe(sourcemaps.write('./'))
+//        .pipe(gulp.dest('dist/js'));
+//});
+
+
+
+
+
+
 
 
 // Include Plugins
